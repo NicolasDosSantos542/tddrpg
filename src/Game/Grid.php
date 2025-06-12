@@ -79,7 +79,7 @@ class Grid
     /**
      * Get the value of cells
      */
-    public function getCells()
+    private function getCells()
     {
         return $this->cells;
     }
