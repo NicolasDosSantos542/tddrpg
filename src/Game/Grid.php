@@ -33,24 +33,32 @@ class Grid
         }
     }
 
+    public function getCell(int $x, int $y)
+    {
+        if (!isset($this->cells[$x][$y])) {
+            return null;
+        }
+        $cell = $this->cells[$x][$y];
+        if (!isset($cell->content)) {
+            return 'empty';
+        }
+        return $cell;
+    }
 
+    public function changeCell(int $x, int $y, $content)
+    {
 
-    // /**
-    //  * Get the value of width
-    //  */ 
-    // public function getwidth()
-    // {
-    //     return $this->width;
-    // }
+        $this->cells[$x][$y] = (object) ["content" => $content];
+        return $this->cells[$x][$y];
+    }
 
-    // /**
-    //  * Get the value of height
-    //  */ 
-    // public function getheight()
-    // {
-    //     return $this->height;
-    // }
+    public function moveContent(int $originX, $originY, int $destinationX, int $destinationY)
+    {
+   
+        $this->cells[$destinationX][$destinationY]->content = $this->cells[$originX][$originY]->content;
+        $this->cells[$originX][$originY]->content = null;
 
+    }
     /**
      * Set the value of cells
      *
@@ -71,7 +79,7 @@ class Grid
     /**
      * Get the value of cells
      */
-    public function getCells()
+    private function getCells()
     {
         return $this->cells;
     }
